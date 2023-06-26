@@ -1,20 +1,6 @@
 /*****************************************************************************************************************
- * Program to demonstrate the Round Robin cpu scheduling algorithm.
- * In Round robin, each process is provided with the same amount of time quantum.
- * If burst time is greater than quantum, the process is preemted.
- * It is preemptive, the process can be stopped once it started.
- * For this a structure representing a process, with members as:
- *      Process id [Id]
- *      Arrirval Time [AT]
- *      Burst Time [BT]
- *      Completion Time [CT]
- *      Turnaround Time [TAT]
- *      Priority [priority]
- *      Waiting Time [WT] is used.
- * Turnaround time [TAT] = Completion time [CT] - Arrival time [AT]
- * Waiting time [WT] = Turnaround time [TAT] - Burst time [BT]
-******************************************************************************************************************/
-
+  Program to demonstrate the Round Robin cpu scheduling algorithm.
+*****************************************************************************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 
