@@ -1,0 +1,38 @@
+IT CONSIST OF DIFFERENT FUNCTIONS THAT WE HAVE USED AND ITS USE AND PROTOTYPE
+
+LINUX COMANDS
+
+1.cat COMMAND
+ * cat command prints out the contents of the given file to the console, without opening a editor.
+ * This command can be used to easily display the contents of the required file, without opening.
+ * FILE is an object type suitable for storing information for a file stream.
+ * fgetc() gets the next character and from the specified stream and advances the position indicator for the stream.
+ * Prototype: int fgetc(FILE *stream)
+ * EOF denotes End Of File.
+ * The file name is to be passed as command line argument.
+
+2.grep COMMAND
+ * The grep command finds the required pattern in the given file, and prints the lines with the pattern to console.
+ * It is stimulated using FILE which is an object type suitable for storing information for a file stream.
+ * fgets() reads a line from the specified stream and stores it into the string.
+ * It stops when either (n-1) characters are read, the newline character is read, or the end-of-file is reached.
+ * Prototype: char *fgets(char *str, int n, FILE *stream)
+ * int feof(FILE *stream) tests the end-of-file indicator for the given stream.
+ * strstr() function finds the first occurrence of the given substring in the given string.
+ * Prototype: char *strstr(const char *haystack, const char *needle)
+
+3.ls COMMAND
+ * The ls command lists all the files present in the given directory.
+ * The <dirent.h> header defines the following data type through typedef:
+ *     DIR is a type representing the directory stream.
+ *     It also defines a structure called dirent, which has the members:
+ *           => ino_t d_ino //File serial name.
+ *           => char d_name //Name of the directory.
+ * The type ino_t is defined in the header <sys/types.h>, and is used for file serial numbers.
+ * The . present in the output represents the current directory.
+ * The .. present in the output represents the parent director.
+
+4.rm COMMAND
+ * The rm command is used for deleting a file present in the current directory.
+ * To stimulate this, the remove() function is used.
+ * The remove function checks the file name, and if existing, removes the file.
