@@ -16,13 +16,13 @@ max=${arr[0]}
 
 for ((i=1; i<n; i++))
 do
-   if [[ "$arr[$i]" -gt "$max" ]]; 
+   if (( "$arr[$i]" -gt "$max" )); 
    then
         max=${arr[$i]}
-    if
+    fi
  done
 
- echo "THE LAEGEST VALUE IN THE ARRAY>> $MAX"   
+ echo "THE LAEGEST VALUE IN THE ARRAY>> $max"   
 
 
 
