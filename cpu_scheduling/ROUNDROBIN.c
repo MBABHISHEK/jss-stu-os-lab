@@ -5,7 +5,7 @@
 #include<stdlib.h>
 
 typedef struct process {
-    int Id, AT, BT, CT, TAT, WT, flag; 
+    int Id, AT, BT, CT, TAT, WT, flag,temp; 
 } pro;
 
 pro p[15];
@@ -37,7 +37,7 @@ void main() {
     for(int i=0; i<n; i++) {
         p[i].Id = (i+1);
         scanf("%d%d", &p[i].AT, &p[i].BT);
-        tempBT[i] = p[i].BT;
+        p[i].temp = p[i].BT;
         p[i].flag = 0;
     }
     printf("\nEnter the time quantum:\n");
@@ -50,6 +50,13 @@ void main() {
     cnt++;
     waitQueue[rear] = 0;
     p[0].flag = 1;
+
+
+     printf("\nPID\tAT\tBT\tCT\tTAT\tWT\n");
+    for(int i=0; i<n; i++) {
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n", p[i].Id, p[i].AT, p[i].temp, p[i].CT, p[i].TAT, p[i].WT);
+    }
+
 
     while (completed != n) {
         curIndex = waitQueue[front];
@@ -72,7 +79,7 @@ void main() {
         }
         p[curIndex].CT = curTime;
         cnt--;
-
+      
         for(int i=0; i<n && p[i].AT <= curTime; i++) {
             if(i == curIndex || p[i].flag == 1 || p[i].BT == 0) 
                 continue;
@@ -90,34 +97,31 @@ void main() {
             completed++;
         
         }
-      //this is for idle case for some input 
+
+
+     //   printf("the index is %d %d ",curIndex,p[curIndex].BT);
         if(cnt==0 && n!=completed) 
         {   front=0;
-            rear=0;
-            int flag=0;
-            while(flag==0) 
-            {
-             printf("|idle 1");
-             curTime++;
-                for(int i=0; i<n;i++)
+            rear=0; 
+            int i;
+    
+                for(i=0; i<n;i++)
                 {
-                if( p[i].AT <= curTime&&p[i].BT!=0)
-                 {
-                rear = (rear+1) % n;
-                p[i].flag = 1;
-                waitQueue[rear] = i;
+                  if(i==curIndex)
+                   break;
+                }
+                printf("|IDLE%d %d",p[i+1].AT-p[i].CT);
+                curTime+=p[i+1].AT-p[i].CT;
+                p[i+1].flag = 1;
+                waitQueue[rear]=i+1;
                 cnt++;
-                flag=1;
-                }
-                }
-        }
-        }
+            }
 
     }
     for(int i=0; i<n; i++) {
         p[i].TAT = p[i].CT - p[i].AT;
         total_TAT += p[i].TAT;
-        p[i].WT = p[i].TAT - tempBT[p[i].Id-1];
+        p[i].WT = p[i].TAT - p[i].temp;
         total_WT += p[i].WT;
     }
     avg_TAT = (float)total_TAT/n;
@@ -126,7 +130,7 @@ void main() {
     //Printing the table of processes with details
     printf("\nPID\tAT\tBT\tCT\tTAT\tWT\n");
     for(int i=0; i<n; i++) {
-        printf("%d\t%d\t%d\t%d\t%d\t%d\n", p[i].Id, p[i].AT, tempBT[i], p[i].CT, p[i].TAT, p[i].WT);
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n", p[i].Id, p[i].AT, p[i].temp, p[i].CT, p[i].TAT, p[i].WT);
     }
 
     printf("\nAverage TAT = %.2f\nAverage WT = %.2f\n", avg_TAT, avg_WT);
