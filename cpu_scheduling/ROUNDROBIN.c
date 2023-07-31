@@ -99,7 +99,7 @@ void main() {
         }
 
 
-     //   printf("the index is %d %d ",curIndex,p[curIndex].BT);
+     //  this is condition which checks for idle time
         if(cnt==0 && n!=completed) 
         {   front=0;
             rear=0; 
