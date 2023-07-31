@@ -54,6 +54,13 @@ void main() {
     while (completed != n) {
         curIndex = waitQueue[front];
         front = (front+1) % n;
+
+
+         if (p[curIndex].AT > curTime) {
+            int idleTime = p[curIndex].AT - curTime;
+            curTime += idleTime;
+            printf("| Idle (%d) %d", idleTime, curTime);
+        }
         if(p[curIndex].BT > quantum) {
             p[curIndex].BT -= quantum;
             curTime += quantum;
@@ -81,6 +88,29 @@ void main() {
             cnt++;
         } else {
             completed++;
+        
+        }
+      //this is for idle case for some input 
+        if(cnt==0 && n!=completed) 
+        {   front=0;
+            rear=0;
+            int flag=0;
+            while(flag==0) 
+            {
+             printf("|idle 1");
+             curTime++;
+                for(int i=0; i<n;i++)
+                {
+                if( p[i].AT <= curTime&&p[i].BT!=0)
+                 {
+                rear = (rear+1) % n;
+                p[i].flag = 1;
+                waitQueue[rear] = i;
+                cnt++;
+                flag=1;
+                }
+                }
+        }
         }
 
     }
