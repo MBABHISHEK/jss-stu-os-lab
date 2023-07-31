@@ -62,12 +62,7 @@ void main() {
         curIndex = waitQueue[front];
         front = (front+1) % n;
 
-
-         if (p[curIndex].AT > curTime) {
-            int idleTime = p[curIndex].AT - curTime;
-            curTime += idleTime;
-            printf("| Idle (%d) %d", idleTime, curTime);
-        }
+      
         if(p[curIndex].BT > quantum) {
             p[curIndex].BT -= quantum;
             curTime += quantum;
